@@ -21,7 +21,50 @@
 
 <script src = "javascript.js"></script>
 <script> 
+  // Function to toggle images
+    function toggleImage(imageId) {
+        const image = document.getElementById(imageId);
+        if (image.src.includes("button-off-xxl.png")) {
+            image.src = "button-on.png"; // 'on' state image
+        } else {
+            image.src = "button-off-xxl.png"; // 'off' state image
+        }
+        updateAndGate(); // Update the AND gate logic after toggling
+    }
 
+    // Input states (assuming true = on, false = off)
+    let inputOne = false;
+    let inputTwo = false;
+
+    // Function to update the AND gate logic based on input states
+    function updateAndGate() {
+        // Check the states of the two inputs (images)
+        if (document.getElementById('toggleImage1').src.includes("button-on.png")) {
+            inputOne = true;
+        } else {
+            inputOne = false;
+        }
+        if (document.getElementById('toggleImage2').src.includes("button-on.png")) {
+            inputTwo = true;
+        } else {
+            inputTwo = false;
+        }
+
+        // Perform AND operation
+        const andResult = inputOne && inputTwo;
+
+        // Update AND gate image based on result
+        if (andResult) {
+            document.getElementById('andGate').src = "and2on.png"; // Display AND gate 'on' image
+        } else {
+            document.getElementById('andGate').src = "and2off.PNG"; // Display AND gate 'off' image
+        }
+    }
+
+    // Function for the "Run" button that updates the AND gate based on inputs
+    function and() {
+        updateAndGate(); // Update the AND gate state when the "Run" button is clicked
+    }
 </script>
 
  <button class="button" onclick = "and()">Run</button>
